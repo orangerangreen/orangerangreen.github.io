@@ -1,0 +1,341 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>我的个人主页</title>
+    <style>
+        /* ===== 全局样式 ===== */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "PingFang SC", "Microsoft YaHei", sans-serif;
+            line-height: 1.8;
+            color: #333;
+            background: #f5f5f5;
+        }
+
+        /* ===== 顶部导航栏 ===== */
+        nav {
+            position: sticky;
+            top: 0;
+            background: #fff;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.08);
+            z-index: 100;
+        }
+
+        nav ul {
+            display: flex;
+            justify-content: center;
+            gap: 32px;
+            list-style: none;
+            padding: 16px 0;
+        }
+
+        nav a {
+            text-decoration: none;
+            color: #555;
+            font-size: 15px;
+            transition: color 0.2s;
+        }
+
+        nav a:hover {
+            color: #4A90D9;
+        }
+
+        /* ===== 主内容区 ===== */
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 0 24px;
+        }
+
+        /* ===== 个人头像区域 ===== */
+        .hero {
+            text-align: center;
+            padding: 80px 24px 60px;
+            background: #fff;
+            margin-bottom: 32px;
+        }
+
+        .hero .avatar {
+            width: 120px;
+            height: 120px;
+            border-radius: 50%;
+            background: #e0e0e0;
+            margin: 0 auto 24px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 48px;
+            color: #999;
+            overflow: hidden;
+        }
+
+        .hero .avatar img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .hero h1 {
+            font-size: 28px;
+            font-weight: 600;
+            margin-bottom: 8px;
+            color: #222;
+        }
+
+        .hero .tagline {
+            font-size: 16px;
+            color: #888;
+            margin-bottom: 20px;
+        }
+
+        .hero .social-links {
+            display: flex;
+            justify-content: center;
+            gap: 16px;
+        }
+
+        .hero .social-links a {
+            display: inline-block;
+            padding: 8px 20px;
+            border: 1px solid #ddd;
+            border-radius: 20px;
+            text-decoration: none;
+            color: #555;
+            font-size: 14px;
+            transition: all 0.2s;
+        }
+
+        .hero .social-links a:hover {
+            background: #4A90D9;
+            color: #fff;
+            border-color: #4A90D9;
+        }
+
+        /* ===== 内容卡片 ===== */
+        .card {
+            background: #fff;
+            border-radius: 12px;
+            padding: 40px;
+            margin-bottom: 32px;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.06);
+        }
+
+        .card h2 {
+            font-size: 22px;
+            font-weight: 600;
+            margin-bottom: 20px;
+            color: #222;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .card h2::before {
+            content: "";
+            display: inline-block;
+            width: 4px;
+            height: 20px;
+            background: #4A90D9;
+            border-radius: 2px;
+        }
+
+        .card p {
+            font-size: 15px;
+            color: #555;
+            line-height: 1.8;
+        }
+
+        /* ===== 技能标签 ===== */
+        .skills {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 12px;
+        }
+
+        .skill-tag {
+            background: #f0f4fa;
+            color: #4A90D9;
+            padding: 6px 16px;
+            border-radius: 6px;
+            font-size: 14px;
+        }
+
+        /* ===== 项目列表 ===== */
+        .project-item {
+            padding: 16px 0;
+            border-bottom: 1px solid #eee;
+        }
+
+        .project-item:last-child {
+            border-bottom: none;
+        }
+
+        .project-item h3 {
+            font-size: 16px;
+            font-weight: 600;
+            margin-bottom: 6px;
+        }
+
+        .project-item p {
+            font-size: 14px;
+            color: #777;
+        }
+
+        .project-item a {
+            color: #4A90D9;
+            text-decoration: none;
+            font-size: 14px;
+        }
+
+        /* ===== 联系方式 ===== */
+        .contact-item {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            padding: 12px 0;
+            font-size: 15px;
+            color: #555;
+        }
+
+        .contact-item .label {
+            font-weight: 600;
+            color: #333;
+            min-width: 80px;
+        }
+
+        /* ===== 页脚 ===== */
+        footer {
+            text-align: center;
+            padding: 32px 24px;
+            color: #aaa;
+            font-size: 13px;
+        }
+
+        footer a {
+            color: #aaa;
+            text-decoration: none;
+        }
+
+        /* ===== 手机端适配 ===== */
+        @media (max-width: 600px) {
+            nav ul {
+                gap: 16px;
+                flex-wrap: wrap;
+            }
+
+            .card {
+                padding: 24px;
+            }
+
+            .hero {
+                padding: 60px 16px 40px;
+            }
+
+            .hero .social-links {
+                flex-wrap: wrap;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- ===== 顶部导航栏 ===== -->
+    <!-- 修改下方链接文字为你想要的导航项 -->
+    <nav>
+        <ul>
+            <li><a href="#about">关于我</a></li>
+            <li><a href="#skills">技能</a></li>
+            <li><a href="#projects">项目</a></li>
+            <li><a href="#contact">联系</a></li>
+        </ul>
+    </nav>
+
+    <!-- ===== 个人头像与简介区域 ===== -->
+    <!-- 把下面的"你的名字"改成你的真实姓名 -->
+    <!-- 头像：把 avatar div 里的文字删掉，换成 <img src="你的头像图片地址" alt="头像"> 即可 -->
+    <section class="hero">
+        <div class="avatar">头像</div>
+        <h1>你的名字</h1>
+        <p class="tagline">一句话介绍你自己，比如：热爱编程的大学生 / 产品设计师 / ...</p>
+        <div class="social-links">
+            <a href="https://github.com/你的用户名" target="_blank">GitHub</a>
+            <a href="mailto:你的邮箱@example.com">Email</a>
+        </div>
+    </section>
+
+    <div class="container">
+
+        <!-- ===== 关于我 ===== -->
+        <section class="card" id="about">
+            <h2>关于我</h2>
+            <p>
+                这里写一段关于你自己的介绍。可以包括你的教育背景、工作经历、兴趣爱好等。
+                比如：我是一名计算机专业的学生，对前端开发和人工智能有浓厚的兴趣。
+                课余时间喜欢阅读、摄影和打篮球。
+            </p>
+        </section>
+
+        <!-- ===== 技能 ===== -->
+        <!-- 修改下方标签为你掌握的技能 -->
+        <section class="card" id="skills">
+            <h2>技能</h2>
+            <div class="skills">
+                <span class="skill-tag">HTML</span>
+                <span class="skill-tag">CSS</span>
+                <span class="skill-tag">JavaScript</span>
+                <span class="skill-tag">Python</span>
+                <span class="skill-tag">Java</span>
+                <span class="skill-tag">Photoshop</span>
+            </div>
+        </section>
+
+        <!-- ===== 项目经历 ===== -->
+        <!-- 修改下方内容为你做过的项目 -->
+        <section class="card" id="projects">
+            <h2>项目经历</h2>
+            <div class="project-item">
+                <h3>项目名称一</h3>
+                <p>简要描述这个项目做了什么，用了什么技术，解决了什么问题。</p>
+                <a href="#" target="_blank">查看项目 &rarr;</a>
+            </div>
+            <div class="project-item">
+                <h3>项目名称二</h3>
+                <p>简要描述这个项目做了什么，用了什么技术，解决了什么问题。</p>
+                <a href="#" target="_blank">查看项目 &rarr;</a>
+            </div>
+        </section>
+
+        <!-- ===== 联系方式 ===== -->
+        <!-- 修改下方信息为你的真实联系方式 -->
+        <section class="card" id="contact">
+            <h2>联系方式</h2>
+            <div class="contact-item">
+                <span class="label">邮箱</span>
+                <span>your-email@example.com</span>
+            </div>
+            <div class="contact-item">
+                <span class="label">GitHub</span>
+                <span>github.com/你的用户名</span>
+            </div>
+            <div class="contact-item">
+                <span class="label">城市</span>
+                <span>你的城市</span>
+            </div>
+        </section>
+
+    </div>
+
+    <!-- ===== 页脚 ===== -->
+    <footer>
+        <p>&copy; 2026 你的名字.  Powered by <a href="https://pages.github.com" target="_blank">GitHub Pages</a>.</p>
+    </footer>
+
+</body>
+</html>
